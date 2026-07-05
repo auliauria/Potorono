@@ -2,13 +2,22 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(threshold = 0.15) {
+export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
+  threshold = 0.12
+) {
   const ref = useRef<T>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const node = ref.current
     if (!node) return
+
+    // Jika sudah di viewport saat load
+    const rect = node.getBoundingClientRect()
+    if (rect.top < window.innerHeight * 0.9) {
+      setIsVisible(true)
+      return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -17,7 +26,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(threshol
           observer.unobserve(node)
         }
       },
-      { threshold }
+      { threshold, rootMargin: '0px 0px -40px 0px' }
     )
 
     observer.observe(node)

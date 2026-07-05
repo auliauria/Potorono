@@ -44,11 +44,11 @@
   }
 }
 
-/* ── Scroll reveal animation ── */
+/* ── Scroll reveal ── */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(32px);
   }
 
   to {
@@ -57,89 +57,322 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .reveal {
-  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reveal-fade {
+  animation: fadeIn 0.8s ease both;
+}
+
+.reveal-left {
+  animation: slideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reveal-right {
+  animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .reveal-delay-1 {
-  animation-delay: 0.08s;
+  animation-delay: 0.1s;
 }
 
 .reveal-delay-2 {
-  animation-delay: 0.16s;
+  animation-delay: 0.2s;
 }
 
 .reveal-delay-3 {
-  animation-delay: 0.24s;
+  animation-delay: 0.3s;
 }
 
 .reveal-delay-4 {
-  animation-delay: 0.32s;
+  animation-delay: 0.4s;
 }
 
-/* ── Floating blob animation ── */
-@keyframes float {
+.reveal-delay-5 {
+  animation-delay: 0.5s;
+}
+
+.reveal-delay-6 {
+  animation-delay: 0.6s;
+}
+
+/* ── Hero animations ── */
+@keyframes morphBlob {
 
   0%,
   100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     transform: translate(0, 0) scale(1);
   }
 
-  50% {
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
     transform: translate(20px, -20px) scale(1.05);
+  }
+
+  50% {
+    border-radius: 50% 50% 30% 70% / 40% 70% 50% 50%;
+    transform: translate(-10px, 15px) scale(0.97);
+  }
+
+  75% {
+    border-radius: 70% 30% 50% 50% / 30% 50% 70% 60%;
+    transform: translate(15px, 5px) scale(1.03);
   }
 }
 
-.animate-float {
-  animation: float 8s ease-in-out infinite;
+@keyframes morphBlob2 {
+
+  0%,
+  100% {
+    border-radius: 40% 60% 60% 40% / 40% 60% 40% 60%;
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    border-radius: 60% 40% 40% 60% / 60% 40% 60% 40%;
+    transform: translate(-20px, 15px) scale(1.08);
+  }
+
+  66% {
+    border-radius: 50% 50% 60% 40% / 50% 40% 60% 50%;
+    transform: translate(10px, -10px) scale(0.95);
+  }
 }
 
-.animate-float-slow {
-  animation: float 12s ease-in-out infinite;
+@keyframes floatY {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
-/* ── Shimmer for loading states ── */
-@keyframes shimmer {
+@keyframes floatYSlow {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-24px) rotate(5deg);
+  }
+}
+
+@keyframes pulseRing {
   0% {
-    background-position: -200% 0;
+    transform: scale(1);
+    opacity: 0.6;
   }
 
   100% {
-    background-position: 200% 0;
+    transform: scale(2.2);
+    opacity: 0;
   }
 }
 
-.skeleton {
-  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
-/* ── Smooth underline hover ── */
-.link-underline {
-  position: relative;
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1.5px;
-  background: currentColor;
-  transition: width 0.3s ease;
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 160, 23, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 4px rgba(212, 160, 23, 0.3);
+  }
 }
 
-.link-underline:hover::after {
-  width: 100%;
+@keyframes scanline {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(100vh);
+  }
 }
 
-/* ── Counter number animation ── */
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
+@keyframes grain {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-2%, -3%);
+  }
+
+  20% {
+    transform: translate(3%, 2%);
+  }
+
+  30% {
+    transform: translate(-1%, 4%);
+  }
+
+  40% {
+    transform: translate(4%, -1%);
+  }
+
+  50% {
+    transform: translate(-3%, 3%);
+  }
+
+  60% {
+    transform: translate(2%, -4%);
+  }
+
+  70% {
+    transform: translate(-4%, 1%);
+  }
+
+  80% {
+    transform: translate(1%, 3%);
+  }
+
+  90% {
+    transform: translate(3%, -2%);
+  }
 }
 
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-blob {
+  animation: morphBlob 12s ease-in-out infinite;
+}
+
+.animate-blob2 {
+  animation: morphBlob2 16s ease-in-out infinite;
+}
+
+.animate-floatY {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.animate-floatY-slow {
+  animation: floatYSlow 10s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 30s linear infinite;
+}
+
+.animate-grain {
+  animation: grain 0.4s steps(1) infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg,
+      #D4A017 0%, #f5d97f 30%, #D4A017 50%, #f5d97f 70%, #D4A017 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 4s linear infinite;
+}
+
+/* Hide scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .reveal-fade,
+  .reveal-left,
+  .reveal-right,
+  .animate-blob,
+  .animate-blob2,
+  .animate-floatY,
+  .animate-floatY-slow,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
 }

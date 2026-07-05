@@ -90,7 +90,7 @@ export default function NewsForm({
     setUploadError(null)
 
     if (file.size > 10 * 1024 * 1024) {
-      setUploadError('Ukuran file terlalu besar. Maksimal 2MB.')
+      setUploadError('Ukuran file terlalu besar. Maksimal 10MB.')
       e.target.value = ''
       return
     }
