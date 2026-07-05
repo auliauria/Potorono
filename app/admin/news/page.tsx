@@ -7,12 +7,14 @@ import NewsForm from '@/components/admin/NewsForm'
 import { News } from '@/types'
 import { NewsInput } from '@/lib/validations'
 
+type NewsItem = News & Record<string, unknown>
+
 export default function NewsPage() {
-  const [newsList, setNewsList] = useState<News[]>([])
+  const [newsList, setNewsList] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [formLoading, setFormLoading] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [editing, setEditing] = useState<News | null>(null)
+  const [editing, setEditing] = useState<NewsItem | null>(null)
   const [deleting, setDeleting] = useState<string | null>(null)
 
   const fetchNews = useCallback(async () => {
@@ -132,7 +134,7 @@ async function handleSubmit(data: NewsInput) {
           <div className="w-7 h-7 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
-        <DataTable
+        <DataTable<NewsItem>
           columns={columns}
           data={newsList}
           keyField="id"

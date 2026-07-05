@@ -8,12 +8,13 @@ import { Umkm } from '@/types'
 import { UmkmInput } from '@/lib/validations'
 import Image from 'next/image'
 
+type UmkmItem = Umkm & Record<string, unknown>
 export default function UmkmPage() {
-  const [umkmList, setUmkmList] = useState<Umkm[]>([])
+  const [umkmList, setUmkmList] = useState<UmkmItem[]>([])
   const [loading, setLoading] = useState(true)
   const [formLoading, setFormLoading] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [editing, setEditing] = useState<Umkm | null>(null)
+  const [editing, setEditing] = useState<UmkmItem | null>(null)
   const [deleting, setDeleting] = useState<string | null>(null)
 
   const fetchUmkm = useCallback(async () => {
@@ -141,7 +142,7 @@ async function handleSubmit(data: UmkmInput) {
           <div className="w-7 h-7 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
-        <DataTable
+        <DataTable<UmkmItem>
           columns={columns}
           data={umkmList}
           keyField="id"

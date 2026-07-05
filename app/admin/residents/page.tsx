@@ -9,15 +9,15 @@ import { ResidentInput } from '@/lib/validations'
 import { calculateAge } from '@/lib/utils'
 
 const PAGE_SIZE = 20
-
+type ResidentItem = Resident & Record<string, unknown>
 export default function ResidentsPage() {
-  const [residents, setResidents] = useState<Resident[]>([])
+  const [residents, setResidents] = useState<ResidentItem[]>([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
   const [formLoading, setFormLoading] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [editing, setEditing] = useState<Resident | null>(null)
+  const [editing, setEditing] = useState<ResidentItem | null>(null)
   const [deleting, setDeleting] = useState<string | null>(null)
   const [filterRT, setFilterRT] = useState<string>('')
   const [search, setSearch] = useState('')
@@ -83,7 +83,7 @@ export default function ResidentsPage() {
     {
       key: 'jenis_kelamin',
       label: 'JK',
-      render: (r: Resident) => (
+      render: (r: ResidentItem) => (
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
           r.jenis_kelamin === 'L'
             ? 'bg-blue-50 text-blue-600'
@@ -194,7 +194,7 @@ export default function ResidentsPage() {
           <div className="w-7 h-7 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
-        <DataTable
+        <DataTable<ResidentItem>          // ← Tambahkan generic <Resident>
           columns={columns}
           data={filtered}
           keyField="id"
