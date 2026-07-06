@@ -2,17 +2,18 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createAdminSupabase } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 
+type CookieItem = { name: string; value: string; options?: Record<string, unknown> }
+
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
-  // Regular client untuk baca session/cookie
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() { return request.cookies.getAll() },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: CookieItem[]) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
@@ -42,7 +43,6 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAdminRoute && user) {
-    // Admin client — bypass semua RLS
     const adminClient = createAdminSupabase(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
