@@ -39,7 +39,7 @@ export default async function AdminLayout({
       {/* ✅ Sidebar hanya muncul saat user sudah login dan aktif */}
       <AdminSidebar profile={profile as Profile} />
       <main className="flex-1 min-w-0">
-        <div className="p-4 pt-20 md:pt-0 md:p-8 max-w-7xl mx-auto">
+        <div className="p-4 pt-20 md:pt-4 md:p-8 max-w-7xl mx-auto">
           {children}
         </div>
       </main>
