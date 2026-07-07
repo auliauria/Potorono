@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   let query = supabase
     .from('residents')
-    .select('jenis_kelamin, tanggal_lahir, is_ibu_hamil, is_disabilitas, rt')
+    .select('jenis_kelamin, tanggal_lahir, is_ibu_hamil, is_disabilitas, rt, no_kk')
 
   if (rt && rt >= 1 && rt <= 9) {
     query = query.eq('rt', rt)
@@ -27,6 +27,12 @@ export async function GET(request: NextRequest) {
   }
 
   const residents = data || []
+  const kkSet = new Set(
+    residents
+      .map(r => r.no_kk)
+      .filter((kk): kk is string => !!kk && kk.trim() !== '')
+  )
+  const jumlah_kk = kkSet.size
 
   const stats: DashboardStats = {
     total: residents.length,
@@ -36,6 +42,7 @@ export async function GET(request: NextRequest) {
     balita: residents.filter(r => isBalita(r.tanggal_lahir)).length,
     ibu_hamil: residents.filter(r => r.is_ibu_hamil).length,
     disabilitas: residents.filter(r => r.is_disabilitas).length,
+    jumlah_kk,
     per_rt: Array.from({ length: 9 }, (_, i) => ({
       rt: i + 1,
       total: residents.filter(r => r.rt === i + 1).length,

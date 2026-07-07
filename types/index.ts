@@ -53,6 +53,7 @@ export interface DashboardStats {
   balita: number
   ibu_hamil: number
   disabilitas: number
+  jumlah_kk: number
   per_rt: { rt: number; total: number }[]
 }
 

@@ -19,6 +19,7 @@ interface ResidentRow {
   is_ibu_hamil: boolean
   is_disabilitas: boolean
   rt: number
+  no_kk: string | null
 }
 
 interface Props {
@@ -29,6 +30,11 @@ interface Props {
 }
 
 function computeStats(residents: ResidentRow[]): DashboardStats {
+  const kkSet = new Set(
+    residents
+      .map(r => r.no_kk)
+      .filter((kk): kk is string => !!kk && kk.trim() !== '')
+  )
   return {
     total: residents.length,
     laki: residents.filter(r => r.jenis_kelamin === 'L').length,
@@ -37,6 +43,7 @@ function computeStats(residents: ResidentRow[]): DashboardStats {
     balita: residents.filter(r => isBalita(r.tanggal_lahir)).length,
     ibu_hamil: residents.filter(r => r.is_ibu_hamil).length,
     disabilitas: residents.filter(r => r.is_disabilitas).length,
+    jumlah_kk: kkSet.size,
     per_rt: Array.from({ length: 9 }, (_, i) => ({
       rt: i + 1,
       total: residents.filter(r => r.rt === i + 1).length,

@@ -44,7 +44,7 @@ export default function Footer() {
                 <span className="font-bold text-base">Dusun Potorono</span>
               </div>
               <p className="text-white/50 text-sm leading-relaxed">
-                Website resmi Dusun Potorono — mengelola data penduduk dan
+                Website profil Dusun Potorono — mengelola data penduduk dan
                 menampilkan potensi lokal untuk masyarakat yang lebih terhubung.
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function Footer() {
               © {year} Dusun Potorono · Banguntapan, Bantul
             </p>
             <p className="text-white/20 text-xs">
-              Dibangun dalam rangka program KKN
+              Dibangun dalam rangka program KKN-PPM UGM 2026
             </p>
           </div>
         </div>

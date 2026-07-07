@@ -12,7 +12,7 @@ export default async function AdminDashboardPage() {
   ] = await Promise.all([
     supabase
       .from('residents')
-      .select('jenis_kelamin, tanggal_lahir, is_ibu_hamil, is_disabilitas, rt'),
+      .select('jenis_kelamin, tanggal_lahir, is_ibu_hamil, is_disabilitas, rt, no_kk'),
     supabase
       .from('umkms')
       .select('*', { count: 'exact', head: true })
@@ -24,7 +24,11 @@ export default async function AdminDashboardPage() {
   ])
 
   const all = residents || []
-
+  const kkSet = new Set(
+    all
+      .map(r => r.no_kk)
+      .filter((kk): kk is string => !!kk && kk.trim() !== '')
+  )
   const fullStats = {
     total: all.length,
     laki: all.filter(r => r.jenis_kelamin === 'L').length,
@@ -33,6 +37,7 @@ export default async function AdminDashboardPage() {
     balita: all.filter(r => isBalita(r.tanggal_lahir)).length,
     ibu_hamil: all.filter(r => r.is_ibu_hamil).length,
     disabilitas: all.filter(r => r.is_disabilitas).length,
+    jumlah_kk: kkSet.size,
     per_rt: Array.from({ length: 9 }, (_, i) => ({
       rt: i + 1,
       total: all.filter(r => r.rt === i + 1).length,

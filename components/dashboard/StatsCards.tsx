@@ -4,11 +4,12 @@ import { useState } from 'react'
 import { DashboardStats } from '@/types'
 import {
   Users, UserRound, UserRoundCheck,
-  HeartPulse, Baby, Heart, Accessibility,
+  HeartPulse, Baby, Heart, Accessibility, Home
 } from 'lucide-react'
 
 const getCards = (stats: DashboardStats) => [
   { label: 'Total Penduduk', value: stats.total, Icon: Users, accent: '#0B3D2E' },
+  { label: 'Kepala Keluarga', value: stats.jumlah_kk, Icon: Home, accent: '#0369A1' },
   { label: 'Laki-laki', value: stats.laki, Icon: UserRound, accent: '#2563EB' },
   { label: 'Perempuan', value: stats.perempuan, Icon: UserRoundCheck, accent: '#DB2777' },
   { label: 'Lansia ≥60th', value: stats.lansia, Icon: HeartPulse, accent: '#7C3AED' },
