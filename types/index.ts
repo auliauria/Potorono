@@ -27,6 +27,7 @@ export interface Umkm {
   nama_pemilik: string | null
   no_whatsapp: string
   alamat: string | null
+  maps_url: string | null
   status_aktif: boolean
   created_at: string
   updated_at: string

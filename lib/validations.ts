@@ -30,7 +30,7 @@ export const umkmSchema = z.object({
   nama_pemilik: z.string().nullable().optional(),
   no_whatsapp: z.string().min(9, 'Nomor WA tidak valid'),
   alamat: z.string().nullable().optional(),
-  // ✅ transform eksplisit → output selalu boolean
+  maps_url: z.string().nullable().optional(),
   status_aktif: booleanField.default(true),
 })
 
